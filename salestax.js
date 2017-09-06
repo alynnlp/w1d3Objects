@@ -24,9 +24,8 @@ var companySalesData = [
 ];
 
 function calculateSalesTax(salesData,taxRates) {
-  //I want an objects that has three objects = three different companies
-    //1st object the first company
-      // with key totalSales and key total Taxes
+  //I want an objects
+
   let output = {};
   //console.log(output)
 
@@ -39,18 +38,26 @@ function calculateSalesTax(salesData,taxRates) {
               salesTotal += salesData[i].sales[j];
             }
     //2. simply caculate the tax using the salesTotal with add and multiplication
-    // taxRates[salesData[i].province]
+    // taxRates[salesData[i].province] >> this will give us the value in the format of object[key]
     // if you know the value you just have to put taxRates.AB (the province)
     //in this case because the value is a variable so you have to do [variable]
       var taxTotal = salesTotal * taxRates[salesData[i].province]
 
-       if (output[salesData[i].name]) {
+
+      //if the value is true means the company name is true, it has occured in the output which is th eobject
+      // then we will add the old total tax to the new one and old sales to new sales
+       if (output[salesData[i].name] in output) {
+
+      // the oldtotalsales is already calculated in the above when the output occured the first time
+      // first time when it loop, is the first telus, so it goes to else,
+      //because the else goes, the totalSales is already there in the outcome []
+      // so
       var oldTotalSales = output[salesData[i].name].totalSales
       var oldTotalTaxes = output[salesData[i].name].totalTaxes
+
       output[salesData[i].name] = {
         totalSales: oldTotalSales + salesTotal,
         totalTaxes: oldTotalTaxes + taxTotal
-
         }
 
        } else {
@@ -63,14 +70,7 @@ function calculateSalesTax(salesData,taxRates) {
   }
 return output;
 }
-  //calculate the sales total of telus in BC then * BC tax + sales total of telus  in SK * 0.1
-  // for (var k = 0; k < salesData.length; i++){
 
-  //   const totalTaxes = {
-
-  //   }
-
-  // }
 console.log(calculateSalesTax(companySalesData, salesTaxRates))
 
 
